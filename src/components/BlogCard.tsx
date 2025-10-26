@@ -37,8 +37,15 @@ export default function BlogCard({ title, slug, tags, coverImage }: BlogCardProp
                 toast.dismiss(t.id);
                 setToastId(null);
                 try {
-              
-                  await api.delete(`/blogs/${slug}`);
+              const token = localStorage.getItem("token");
+                  await api.delete(`/blogs/${slug}`,
+                    {
+        // 2. Add the headers object
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+                  );
                   toast.success("Blog deleted successfully!")
                   router.push("/blogs");
                 } catch (err: any) {

@@ -89,6 +89,8 @@ export default function ProjectForm({ initialData, id, isEdit }: ProjectFormProp
     }
 
     try {
+
+       const token = localStorage.getItem("token");
       if (isEdit && id) {
         await api.put(`/projects/${id}`, {
           title,
@@ -98,7 +100,13 @@ export default function ProjectForm({ initialData, id, isEdit }: ProjectFormProp
           thumbnail,
           liveUrl,
           repoUrl,
-        });
+        }, 
+      {
+      
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
         toast.success("Project updated successfully!");
       } else {
         await api.post("/projects", {
@@ -109,7 +117,15 @@ export default function ProjectForm({ initialData, id, isEdit }: ProjectFormProp
           thumbnail,
           liveUrl,
           repoUrl,
-        });
+        },
+        {
+       
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      
+      );
         toast.success("Project created successfully!");
       }
       router.push("/projects");

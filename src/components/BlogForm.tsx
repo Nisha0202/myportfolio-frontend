@@ -50,13 +50,20 @@ export default function BlogForm({ initialData, slug, isEdit }: BlogFormProps) {
 
     setLoading(true);
     try {
+      const token = localStorage.getItem("token");
       if (isEdit) {
         await api.put(`/blogs/${slug}`, {
           title,
           content,
           tags: tagArray,
           coverImage,
-        });
+        }, 
+      {
+        // headers object
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
         toast.success("Blog updated successfully!");
       } else {
         await api.post("/blogs/new-blog", {
@@ -64,7 +71,15 @@ export default function BlogForm({ initialData, slug, isEdit }: BlogFormProps) {
           content,
           tags: tagArray,
           coverImage,
-        });
+        },
+        {
+        //  headers object
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      
+      );
         toast.success("Blog created successfully!");
       }
       router.push("/blogs");

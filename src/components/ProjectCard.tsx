@@ -42,7 +42,15 @@ export default function ProjectCard({ project }: { project: Project }) {
                 toast.dismiss(t.id);
                 setToastId(null);
                 try {
-                  await api.delete(`/projects/${project.id}`);
+                  const token = localStorage.getItem("token");
+                  await api.delete(`/projects/${project.id}`, 
+                    {
+        // 2. Add the headers object
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+                  );
                   toast.success("Project deleted!");
                   router.refresh();
                 } catch (err: any) {
