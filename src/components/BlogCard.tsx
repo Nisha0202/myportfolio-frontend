@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import api from "@/utils/api";
@@ -77,9 +78,12 @@ export default function BlogCard({ title, slug, tags, coverImage }: BlogCardProp
   return (
     <div className="p-8 max-w-sm bg-zinc-200 rounded-xl  shadow hover:shadow-lg transition relative h-96">
       {coverImage && (
-        <img
+        <Image
+          width={400}
+          height={200}
           src={coverImage}
           alt={title}
+           unoptimized={true}
           className="w-full h-40 object-cover rounded-lg mb-6"
         />
       )}
