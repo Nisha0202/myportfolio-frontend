@@ -9,17 +9,26 @@ export default function EditProjectPage() {
   const { id } = useParams();
   const [data, setData] = useState<any>(null);
 
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const res = await api.get(`/projects/${id}`);
-        setData(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchProject();
-  }, [id]);
+useEffect(() => {
+  const token = localStorage.getItem("token"); // get token from localStorage
+
+  const fetchProject = async () => {
+    try {
+      const res = await api.get(`/projects/${id}`, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      });
+
+      setData(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (id) fetchProject();
+}, [id]);
+
 
   if (!data) return <p className="text-center mt-12 sm:mt-20">Loading...</p>;
 

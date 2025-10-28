@@ -9,11 +9,22 @@ export default function EditBlogPage() {
   const { slug } = useParams();
   const [blog, setBlog] = useState<any>(null);
 
-  useEffect(() => {
+ useEffect(() => {
+    const token = localStorage.getItem("token");
+
     async function fetchBlog() {
-      const res = await api.get(`/blogs/${slug}`);
-      setBlog(res.data);
+      try {
+        const res = await api.get(`/blogs/${slug}`, {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        });
+        setBlog(res.data);
+      } catch (err) {
+        console.error(err);
+      }
     }
+
     if (slug) fetchBlog();
   }, [slug]);
 

@@ -2,12 +2,18 @@
 export const revalidate = 60; // Revalidate each post every 1 minute
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`);
+  const token = process.env.API_TOKEN; // token stored in .env
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : "",
+    },
+  });
+
+  if (!res.ok) return [];
+
   const blogs = await res.json();
 
-  return blogs.map((b: any) => ({
-    slug: b.slug
-  }));
+  return blogs.map((b: any) => ({ slug: b.slug }));
 }
 
 export default async function BlogDetailsPage({ params }: { params: { slug: string } }) {
