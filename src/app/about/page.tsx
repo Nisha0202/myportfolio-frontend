@@ -45,7 +45,7 @@ export default async function AboutMe() {
         >
           <div className="rounded-md bg-zinc-200 p-6 sm:p-8 lg:p-10">
             <div className="flex flex-col justify-center">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">About Me</h2>
+              <h2 className="text-xl font-bold mb-4 text-gray-800">About Me</h2>
 
               {/* Static bio */}
               <p className="text-sm leading-relaxed mb-8 text-gray-700">{bio}</p>
