@@ -16,15 +16,15 @@ export async function generateStaticParams() {
   return blogs.map((b: any) => ({ slug: b.slug }));
 }
 
-// ✅ Use the official Next.js type for `params`
-interface BlogDetailsPageProps {
-  params: {
-    slug: string;
-  };
-}
+// ✅ Next.js 15+ expects Promise for `params`
+export default async function BlogDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-export default async function BlogDetailsPage({ params }: BlogDetailsPageProps) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${params.slug}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`, {
     next: { revalidate: 60 },
   });
 
