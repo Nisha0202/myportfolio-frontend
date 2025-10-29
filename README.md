@@ -1,6 +1,6 @@
 # Personal Portfolio Website
 
-🚀 **Live Demo:** [View Portfolio](https://your-portfolio-url.vercel.app)
+🚀 **Live Demo:** [View Portfolio](https://myportfolio-frontend-wheat.vercel.app/)
 
 ## Overview
 
@@ -30,8 +30,8 @@ A modern, responsive portfolio website built with Next.js 14 and TypeScript, fea
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/my-portfolio.git
-cd my-portfolio
+git clone https://github.com/Nisha0202/myportfolio-frontend
+cd myportfolio-frontend
 ```
 
 2. **Install dependencies:**
@@ -43,6 +43,7 @@ npm install
 Create a `.env` file in the root directory and add necessary variables:
 ```env
 NEXT_PUBLIC_API_URL=your_api_url
+API_TOKEN=your_token
 ```
 
 4. **Run the development server:**
