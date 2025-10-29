@@ -12,7 +12,7 @@ export default async function AllBlogsPage() {
  
 
   return (
-    <main className="max-w-5xl mx-auto py-10 px-4">
+    <main className="max-w-6xl mx-auto py-10 px-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-xl font-semibold">My Blogs</h1>
         <NewBlogButton/>
